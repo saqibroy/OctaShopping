@@ -1,0 +1,17 @@
+<h1>My Cart</h1>
+<%= link_to "Clear Cart",cart_clear_path %>
+<ul>
+	<% total=0 %>
+      <% @cart.each do |id, quantity| %>
+      <% product= Product.find_by_id(id) %>
+      <li>
+      <%= link_to product.title, product %>
+      <p><%= product.description %> </p>
+      <p><%= number_to_currency(product.price, unit: '$') %></p>
+      <p>Quantity:<%= quantity %></p>
+      <% total=total+quantity*product.price %>
+      </li>
+      <% end %>
+      <p><b>Total price:<%= total %></b></p>
+
+</ul>
